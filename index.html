@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Askari Academy — Nurturing The Officer In You</title>
+
+  <!-- Google Fonts: Lexend, Montserrat, Playfair Display, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Lexend:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#24784B', // Stepped darker to rich forest-emerald (#24784B)
+              dark: '#1C613C'
+            },
+            coral: '#FF7A70', // DESIGN.md §9b: lightened for WCAG AA contrast (≥4.5:1 on #262E3E)
+            cream: '#DAD7A5',
+            sage: '#B9C1B5',
+            strip: '#262E3E',
+            footer: '#1F2722',
+            legal: '#171C19',
+            mapbg: '#1B2233',
+            badge: '#3A3A3C',
+            line: '#C9CCCB',
+            olive: '#5F705F'
+          },
+          fontFamily: {
+            display: ['Lexend', 'sans-serif'],
+            sans: ['Montserrat', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+            hero: ['Inter', 'Helvetica', 'Arial', 'sans-serif']
+          },
+          boxShadow: {
+            card: '0 4px 14px rgba(0,0,0,.10)',
+            cardHover: '0 8px 22px rgba(0,0,0,.16)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* DESIGN.md Tokens (Rich forest-emerald #24784B) */
+    :root {
+      --green-500: #24784B;
+      --green-600: #1C613C;
+      --coral-500: #FF7A70;
+      --cream-300: #DAD7A5;
+      --sage-300: #B9C1B5;
+      --bg-page: #FFFFFF;
+      --bg-hero: #1a1a1a;
+      --bg-strip: #262E3E;
+      --bg-footer: #1F2722;
+      --bg-legal: #171C19;
+      --bg-map: #1B2233;
+      --bg-badge: #3A3A3C;
+      --text-heading: #111111;
+      --text-body: #2B2B2B;
+      --text-muted: #4A4A4A;
+      --border-card: #C9CCCB;
+      --shadow-card: 0 4px 14px rgba(0,0,0,.10);
+      --shadow-card-hover: 0 8px 22px rgba(0,0,0,.16);
+      --icon-olive: #5F705F;
+    }
+
+    /* Hero H1 tight negative tracking and word-spacing fix per DESIGN.md §9b */
+    .hero-h1-tight {
+      letter-spacing: -0.04em;
+      word-spacing: 0.15em;
+      line-height: 0.82;
+    }
+
+    /* Marquee animation (right to left) */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    /* Back-to-top slanted shape (§5) */
+    .back-to-top-polygon {
+      clip-path: polygon(24% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    @media (max-width: 768px) {
+      .back-to-top-polygon {
+        clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+
+    /* Subtle reveal on scroll (§8) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 400ms ease-out, transform 400ms ease-out;
+      will-change: opacity, transform;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-neutral-800 antialiased selection:bg-brand selection:text-white overflow-x-hidden">
+
+  <!-- ========================================================================= -->
+  <!-- TOP ANNOUNCEMENT MARQUEE STRIP                                            -->
+  <!-- ========================================================================= -->
+  <div class="w-full bg-white border-b border-neutral-200 overflow-hidden relative z-40 select-none py-1.5 shadow-sm">
+    <div class="marquee-track font-sans font-bold text-red-600 uppercase text-xs md:text-sm tracking-[0.1em]">
+      <span class="px-6 flex items-center gap-4">
+        Classes are active, take part &amp; donot let go of this oppurtunity
+        <span class="text-neutral-300 font-normal">&bull;</span>
+      </span>
+      <span class="px-6 flex items-center gap-4">
+        Classes are active, take part &amp; donot let go of this oppurtunity
+        <span class="text-neutral-300 font-normal">&bull;</span>
+      </span>
+      <span class="px-6 flex items-center gap-4">
+        Classes are active, take part &amp; donot let go of this oppurtunity
+        <span class="text-neutral-300 font-normal">&bull;</span>
+      </span>
+      <span class="px-6 flex items-center gap-4">
+        Classes are active, take part &amp; donot let go of this oppurtunity
+        <span class="text-neutral-300 font-normal">&bull;</span>
+      </span>
+      <span class="px-6 flex items-center gap-4">
+        Classes are active, take part &amp; donot let go of this oppurtunity
+        <span class="text-neutral-300 font-normal">&bull;</span>
+      </span>
+      <span class="px-6 flex items-center gap-4">
+        Classes are active, take part &amp; donot let go of this oppurtunity
+        <span class="text-neutral-300 font-normal">&bull;</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 6.1 HERO SECTION (§5, §6.1, §3)                                          -->
+  <!-- ========================================================================= -->
+  <header id="home" class="relative w-full h-[812px] min-h-[85svh] bg-[#1a1a1a] overflow-hidden">
+    <!-- Hero Background Image (Clean sRGB Grayscale + Neutral Overlay, no green hue) -->
+    <img 
+      src="assets/hero-bg.jpg" 
+      alt="Pak Army Cadet with scoped rifle" 
+      class="absolute inset-0 w-full h-full object-cover filter grayscale contrast-[1.15] brightness-[0.96]"
+      style="object-position: 65% 30%;"
+    />
+    <div class="absolute inset-0 bg-black/25 pointer-events-none"></div>
+
+    <!-- Top Floating Icon Buttons (§5) -->
+    <!-- Left: Menu Drawer Toggle -->
+    <div class="absolute top-[54px] left-[24px] md:left-[48px] z-30">
+      <button 
+        type="button"
+        onclick="toggleMenu(true)"
+        class="group w-11 h-11 -m-1.5 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 transition-transform active:scale-95"
+        aria-label="Open navigation menu">
+        <span class="w-8 h-8 rounded-full border-[1.5px] border-white bg-transparent group-hover:bg-white text-white group-hover:text-neutral-900 flex items-center justify-center transition-colors duration-200 shadow-sm">
+          <!-- Right Arrow Glyph -->
+          <svg class="w-3.5 h-3.5 ml-0.5 fill-current" viewBox="0 0 24 24">
+            <path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.7 12l-8.85-7.85-1.42 1.42L16.86 11H5v2z"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <!-- Right: Call / WhatsApp Overlay Button -->
+    <div class="absolute top-[54px] right-[24px] md:right-[54px] z-30">
+      <a 
+        href="https://wa.me/[PHONE]" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="w-11 h-11 -m-1.5 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 group transition-transform duration-200 hover:scale-108"
+        aria-label="Contact us on WhatsApp">
+        <span class="w-8 h-8 rounded-full bg-white text-neutral-600 shadow-md flex items-center justify-center">
+          <!-- Phone Handset Glyph -->
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- Bottom Left Text Block (§6.1) -->
+    <div class="absolute bottom-[64px] md:bottom-[130px] left-[24px] md:left-[83px] z-20 max-w-3xl">
+      <!-- Eyebrow: Brand Name -->
+      <p class="font-sans text-[20px] md:text-[24px] font-normal uppercase leading-[1.2] tracking-[0.02em] text-[#F2F2F2] mb-3">
+        ASKARI ACADEMY
+      </p>
+
+      <!-- 3-line Hero H1 Headline -->
+      <h1 class="font-hero font-extrabold uppercase text-sage text-[clamp(2.75rem,6vw,5.5rem)] hero-h1-tight">
+        <span class="block">NURTURING</span>
+        <span class="block">THE OFFICER</span>
+        <span class="block">IN YOU</span>
+      </h1>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MENU DRAWER [NEW] (§5)                                                    -->
+  <!-- ========================================================================= -->
+  <!-- Backdrop Scrim -->
+  <div 
+    id="menu-scrim" 
+    class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-250 ease-out"
+    onclick="toggleMenu(false)">
+  </div>
+
+  <!-- Drawer Container -->
+  <div 
+    id="menu-drawer" 
+    class="fixed top-0 left-0 bottom-0 w-[320px] max-w-[85vw] bg-strip z-50 transform -translate-x-full transition-transform duration-250 ease-out flex flex-col p-8 shadow-2xl"
+    aria-label="Navigation drawer"
+    role="dialog"
+    aria-modal="true">
+    <div class="flex items-center justify-between pb-6 border-b border-white/10">
+      <span class="font-sans font-bold text-white text-base tracking-[0.2em] uppercase">MENU</span>
+      <button 
+        type="button"
+        onclick="toggleMenu(false)" 
+        class="w-11 h-11 flex items-center justify-center text-white/80 hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand rounded-full transition-colors" 
+        aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- 4 Nav Links (§9a: removed Information & Commission Dates) -->
+    <nav class="flex flex-col gap-6 mt-8">
+      <a href="#home" onclick="toggleMenu(false)" class="font-sans text-sm font-semibold uppercase tracking-[0.2em] text-white hover:text-brand transition-colors duration-200 py-1">HOME</a>
+      <a href="#courses" onclick="toggleMenu(false)" class="font-sans text-sm font-semibold uppercase tracking-[0.2em] text-white hover:text-brand transition-colors duration-200 py-1">COURSES</a>
+      <a href="#about" onclick="toggleMenu(false)" class="font-sans text-sm font-semibold uppercase tracking-[0.2em] text-white hover:text-brand transition-colors duration-200 py-1">ABOUT</a>
+      <a href="#contact" onclick="toggleMenu(false)" class="font-sans text-sm font-semibold uppercase tracking-[0.2em] text-white hover:text-brand transition-colors duration-200 py-1">CONTACT US</a>
+    </nav>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 6.2 STRIP (§5, §6.2)                                                      -->
+  <!-- ========================================================================= -->
+  <div class="w-full bg-strip py-2.5 px-4 flex items-center justify-center min-h-[30px] border-t border-black/10">
+    <p class="font-sans text-[12px] md:text-[13px] font-medium uppercase tracking-[0.2em] md:tracking-[0.35em] text-coral text-center leading-normal md:leading-none">
+      GET GUIDANCE FROM DECORATED LIEUTENANT COLONEL (RETD) TAMGHA-I-IMTIAZ (M)
+    </p>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN CONTENT CONTAINER (§4)                                               -->
+  <!-- ========================================================================= -->
+  <main class="w-full bg-white">
+
+    <!-- ======================================================================= -->
+    <!-- 6.3 COMMANDANT'S ADDRESS (§5, §6.3)                                     -->
+    <!-- ======================================================================= -->
+    <section id="commandant" class="max-w-[1200px] mx-auto px-4 pt-24 reveal">
+      <!-- Ornament Divider (§5) -->
+      <div class="flex items-center justify-center max-w-[570px] w-full mx-auto mb-7" aria-hidden="true">
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-brand"></div>
+        <span class="text-brand text-[24px] leading-none px-4 select-none">✥</span>
+        <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-brand"></div>
+      </div>
+
+      <!-- Section H2 (§3, §6.3) -->
+      <h2 class="font-display font-semibold uppercase text-brand text-[clamp(1.75rem,3vw,2.6rem)] tracking-[0.15em] md:tracking-[0.22em] text-center leading-[1.1]">
+        COMMANDANT'S ADDRESS
+      </h2>
+
+      <!-- Commandant Card (645x310px, centered, 60px below H2) -->
+      <div class="max-w-[645px] mx-auto mt-[60px] bg-white border border-line rounded-[6px] shadow-card hover:shadow-cardHover hover:border-neutral-400 hover:-translate-y-0.5 transition-all duration-200 relative p-6 md:p-8">
+        <!-- Byline -->
+        <p class="font-sans text-[11px] font-bold text-neutral-900 tracking-[0.02em] mb-4">
+          By Lt Col (Retd) himself :
+        </p>
+
+        <!-- Quote Body (§3, §9b readable text variant) -->
+        <div class="font-sans text-[15px] font-normal text-neutral-800 leading-[1.75] tracking-[0.02em] space-y-4 pr-0 sm:pr-16 md:pr-20">
+          <p>
+            This is an endeavour by a war veteran Lieutenant Colonel, Tamgha-e-Imtiaz (Mil) in realization after three periods of service postings in and around areas to Bahawalpur.
+          </p>
+          <p>
+            If the earth is rich and weather is suitable, only the right choice of seed can do the miracle. Likewise, students of these areas have got potential, if they also fulfill the basic criteria for ISSB. Giving them accurate guidelines can change their future.
+          </p>
+          <p>
+            If you only fulfill conditions of ISSB, a bright, charismatic and scintillating future is a guideline step away. You come get the guidelines and the future will call you by itself.
+          </p>
+        </div>
+
+        <!-- Tank Silhouette (bottom-right, olive #5F705F) -->
+        <img 
+          src="assets/tank-silhouette.png?v=2" 
+          alt="Tank emblem" 
+          class="hidden sm:block absolute bottom-6 right-6 w-[78px] h-auto select-none pointer-events-none opacity-95"
+        />
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- 6.4 STATEMENT + SERVICE CARDS (§5, §6.4)                                -->
+    <!-- ======================================================================= -->
+    <section id="services" class="max-w-[1200px] mx-auto px-4 mt-[117px] reveal">
+      <!-- Centered Uppercase Statement Heading (§3, §9b fix) -->
+      <h3 class="font-sans text-[20px] md:text-[24px] font-bold uppercase text-[#111111] tracking-normal text-center leading-[1.3] max-w-4xl mx-auto px-2">
+        PREPARE YOUR INITIAL TEST OF ARMY, NAVY &amp; PAF WITH US FOR YOUR BEST CHANCE
+      </h3>
+
+      <!-- 3 Service Cards in a Row (1000px wide, 6px tight desktop gap) -->
+      <div class="max-w-[1000px] mx-auto mt-[83px] grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[6px]">
+        <!-- Service Card 1: Pak Army -->
+        <div class="bg-white border border-line rounded-[6px] shadow-card hover:shadow-cardHover hover:border-neutral-400 hover:-translate-y-0.5 transition-all duration-200 p-7 flex flex-col min-h-[262px]">
+          <h4 class="font-sans text-[20px] font-medium uppercase text-brand tracking-[0.02em] text-center leading-[1.2]">
+            PAK ARMY
+          </h4>
+          <!-- Shield Icon -->
+          <div class="my-4 flex items-center justify-center">
+            <svg class="w-[30px] h-[30px] fill-current text-brand" viewBox="0 0 24 24">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+            </svg>
+          </div>
+          <p class="font-sans text-[15px] font-semibold text-[#111111] leading-[1.5] text-left">
+            Askari Academy helps candidates prepare for Pakistan Army initial test &amp; ISSB through structured lessons, practice questions &amp; online learning resources. Enroll to begin your preparation.
+          </p>
+        </div>
+
+        <!-- Service Card 2: PAF -->
+        <div class="bg-white border border-line rounded-[6px] shadow-card hover:shadow-cardHover hover:border-neutral-400 hover:-translate-y-0.5 transition-all duration-200 p-7 flex flex-col min-h-[262px]">
+          <h4 class="font-sans text-[20px] font-medium uppercase text-brand tracking-[0.02em] text-center leading-[1.2]">
+            PAF
+          </h4>
+          <!-- Airplane Icon -->
+          <div class="my-4 flex items-center justify-center">
+            <svg class="w-[30px] h-[30px] fill-current text-brand" viewBox="0 0 24 24">
+              <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+            </svg>
+          </div>
+          <p class="font-sans text-[15px] font-semibold text-[#111111] leading-[1.5] text-left">
+            Join Askari Academy for Expert preparation in AD &amp; CAE, Airman, Aerotrade, &amp; Provost tests. Prepare conveniently and confidently with our expert in person guidance.
+          </p>
+        </div>
+
+        <!-- Service Card 3: Pak Navy -->
+        <div class="bg-white border border-line rounded-[6px] shadow-card hover:shadow-cardHover hover:border-neutral-400 hover:-translate-y-0.5 transition-all duration-200 p-7 flex flex-col min-h-[262px]">
+          <h4 class="font-sans text-[20px] font-medium uppercase text-brand tracking-[0.02em] text-center leading-[1.2]">
+            PAK NAVY
+          </h4>
+          <!-- Anchor Icon -->
+          <div class="my-4 flex items-center justify-center">
+            <svg class="w-[30px] h-[30px] fill-current text-brand" viewBox="0 0 24 24">
+              <path d="M12 2a3 3 0 0 0-3 3c0 1.31.84 2.41 2 2.83V10H8V8H6v2H3v2h3v5.09A7.006 7.006 0 0 0 11 23.95V24h2v-.05a7.006 7.006 0 0 0 5-6.86V12h3v-2h-3V8h-2v2h-3V7.83c1.16-.42 2-1.52 2-2.83a3 3 0 0 0-3-3zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm5 13.09c0 2.76-2.24 5-5 5s-5-2.24-5-5V12h10v5.09z"/>
+            </svg>
+          </div>
+          <p class="font-sans text-[15px] font-semibold text-[#111111] leading-[1.5] text-left">
+            Prepare for Pakistan Navy entrance examinations, including PN Cadet &amp; Marine/Sailor tests, with structured lessons, practice questions, and online preparation resources.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- 6.5 OUR COURSES (§5, §6.5)                                              -->
+    <!-- ======================================================================= -->
+    <section id="courses" class="max-w-[1200px] mx-auto px-4 mt-[120px] reveal">
+      <!-- Ornament Divider -->
+      <div class="flex items-center justify-center max-w-[570px] w-full mx-auto mb-7" aria-hidden="true">
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-brand"></div>
+        <span class="text-brand text-[24px] leading-none px-4 select-none">✥</span>
+        <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-brand"></div>
+      </div>
+
+      <!-- Section H2 -->
+      <h2 class="font-display font-semibold uppercase text-brand text-[clamp(1.75rem,3vw,2.6rem)] tracking-[0.15em] md:tracking-[0.22em] text-center leading-[1.1]">
+        OUR COURSES
+      </h2>
+
+      <!-- Subtitle -->
+      <p class="font-sans text-[16px] font-semibold text-[#111111] text-center mt-6 max-w-2xl mx-auto leading-normal">
+        Our courses are designed and taught by a Pak Army Veteran. Enroll in our courses without wasting a minute.
+      </p>
+
+      <!-- Two Course Cards (264px each, 92px gap on desktop) -->
+      <div class="max-w-[620px] mx-auto mt-[92px] grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-[92px] justify-center items-start">
+        
+        <!-- Course Card 1: Basic -->
+        <div class="bg-white border border-line rounded-[6px] shadow-card hover:shadow-cardHover hover:border-neutral-400 hover:-translate-y-0.5 transition-all duration-200 w-full max-w-[280px] sm:w-[264px] mx-auto flex flex-col justify-between overflow-hidden relative group cursor-pointer">
+          
+          <!-- Hover Syllabus Box (Light grey background, thin border, dark grey bulleted text) -->
+          <div class="absolute inset-0 bg-[#F4F5F7] border border-line rounded-[6px] p-6 flex flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 shadow-md">
+            <div class="font-sans font-bold text-xs uppercase tracking-wider text-neutral-800 mb-4 border-b border-line pb-2">
+              <span>COURSE DETAILS</span>
+            </div>
+            <ul class="font-sans text-[12px] text-neutral-700 space-y-3 leading-normal">
+              <li class="flex items-start gap-2">
+                <span class="text-neutral-500 font-bold">&bull;</span>
+                <span>Daily physical training &amp; individual obstacle drills</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-neutral-500 font-bold">&bull;</span>
+                <span>Progressive Group Tasks (PGT) &amp; Command Tasks</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-neutral-500 font-bold">&bull;</span>
+                <span>Screening tests (Verbal, Non-Verbal, OIR &amp; Mechanical)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-neutral-500 font-bold">&bull;</span>
+                <span>One-on-one interview evaluation with Army Psychologist</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="p-5 pb-6">
+            <!-- Name (Playfair italic) -->
+            <h3 class="font-serif italic text-[15px] font-normal text-neutral-800 text-center leading-[1.3]">
+              ISSB Prep Course (Basic)
+            </h3>
+
+            <!-- Duration (Real digits per §9b, Lexend 30px bold 0.25em tracking) -->
+            <div class="font-display font-bold text-[30px] uppercase text-neutral-900 tracking-[0.25em] text-center my-4 leading-none">
+              10 DAYS
+            </div>
+
+            <!-- Bullet List (Montserrat 12px) -->
+            <ul class="font-sans text-[12px] font-normal text-neutral-800 space-y-2 mt-4 tracking-[0.02em]">
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0"></span>
+                <span>ISSB Physical Training</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0"></span>
+                <span>Individual Tasks</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0"></span>
+                <span>Group Tasks</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0"></span>
+                <span>Psychologist Interview</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Bottom Footer Strip (Overlapping border strip with price + graduation cap) -->
+          <div class="w-full h-[54px] border-t border-line bg-white px-5 flex items-center justify-between">
+            <span class="font-sans italic text-[12px] font-normal uppercase tracking-[0.15em] text-neutral-900">
+              PKR 10,000
+            </span>
+            <!-- Graduation Cap Glyph -->
+            <svg class="w-7 h-7 fill-current text-neutral-900" viewBox="0 0 24 24">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Course Card 2: Exhaustive -->
+        <div class="bg-white border border-line rounded-[6px] shadow-card hover:shadow-cardHover hover:border-neutral-400 hover:-translate-y-0.5 transition-all duration-200 w-full max-w-[280px] sm:w-[264px] mx-auto flex flex-col justify-between overflow-hidden relative group cursor-pointer">
+          
+          <!-- Hover Syllabus Box (Light grey background, thin border, dark grey bulleted text) -->
+          <div class="absolute inset-0 bg-[#F4F5F7] border border-line rounded-[6px] p-6 flex flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 shadow-md">
+            <div class="font-sans font-bold text-xs uppercase tracking-wider text-neutral-800 mb-4 border-b border-line pb-2">
+              <span>COURSE DETAILS</span>
+            </div>
+            <ul class="font-sans text-[12px] text-neutral-700 space-y-3 leading-normal">
+              <li class="flex items-start gap-2">
+                <span class="text-neutral-500 font-bold">&bull;</span>
+                <span>Extended conditioning &amp; military obstacle course mastery</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-neutral-500 font-bold">&bull;</span>
+                <span>Full outdoor GTO tasks, bridge building &amp; command tasks</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-neutral-500 font-bold">&bull;</span>
+                <span>Complete psychological tests (WAT, TAT, SRT &amp; Self-Desc)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-neutral-500 font-bold">&bull;</span>
+                <span>Multiple mock Deputy President &amp; Psychologist interviews</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="p-5 pb-6">
+            <!-- Name (Playfair italic) -->
+            <h3 class="font-serif italic text-[15px] font-normal text-neutral-800 text-center leading-[1.3]">
+              ISSB Prep Course (Exhaustive)
+            </h3>
+
+            <!-- Duration (Real digits per §9b, Lexend 30px bold 0.25em tracking) -->
+            <div class="font-display font-bold text-[30px] uppercase text-neutral-900 tracking-[0.25em] text-center my-4 leading-none">
+              15 DAYS
+            </div>
+
+            <!-- Bullet List (Montserrat 12px) -->
+            <ul class="font-sans text-[12px] font-normal text-neutral-800 space-y-2 mt-4 tracking-[0.02em]">
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0"></span>
+                <span>ISSB Physical Training</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0"></span>
+                <span>Individual Tasks</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0"></span>
+                <span>Group Tasks</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0"></span>
+                <span>Psychologist Interview</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Bottom Footer Strip (Overlapping border strip with price + graduation cap) -->
+          <div class="w-full h-[54px] border-t border-line bg-white px-5 flex items-center justify-between">
+            <span class="font-sans italic text-[12px] font-normal uppercase tracking-[0.15em] text-neutral-900">
+              PKR 15,000
+            </span>
+            <!-- Graduation Cap Glyph -->
+            <svg class="w-7 h-7 fill-current text-neutral-900" viewBox="0 0 24 24">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- 6.6 ABOUT US (§5, §6.6)                                                 -->
+    <!-- ======================================================================= -->
+    <section id="about" class="max-w-[1200px] mx-auto px-4 mt-[120px] reveal">
+      <!-- Ornament Divider -->
+      <div class="flex items-center justify-center max-w-[570px] w-full mx-auto mb-7" aria-hidden="true">
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-brand"></div>
+        <span class="text-brand text-[24px] leading-none px-4 select-none">✥</span>
+        <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-brand"></div>
+      </div>
+
+      <!-- Section H2 -->
+      <h2 class="font-display font-semibold uppercase text-brand text-[clamp(1.75rem,3vw,2.6rem)] tracking-[0.15em] md:tracking-[0.22em] text-center leading-[1.1]">
+        ABOUT US
+      </h2>
+
+      <!-- 4 Numbered Q&A Rows (984px wide container, pitch ≈ 99px) -->
+      <div class="max-w-[984px] mx-auto mt-[80px] space-y-10 md:space-y-12">
+        
+        <!-- Row 1 -->
+        <div class="flex items-start gap-5 md:gap-7">
+          <div class="w-[44px] h-[44px] md:w-[50px] md:h-[50px] rounded-full bg-badge text-white font-sans font-semibold text-[18px] md:text-[20px] flex items-center justify-center flex-shrink-0 shadow-sm">
+            1
+          </div>
+          <div class="pt-1.5">
+            <h3 class="font-sans text-[14px] font-bold uppercase text-[#111111] tracking-[0.01em] leading-[1.3]">
+              WHAT PAK ARMY WINGS DO WE OFFER COURSES FOR?
+            </h3>
+            <!-- Rewritten accurate answer naming wings per §9b -->
+            <p class="font-sans text-[14px] font-normal text-muted leading-[1.5] mt-1.5">
+              We offer comprehensive preparatory courses for all three premier wings of the Pakistan Armed Forces: Pakistan Army, Pakistan Air Force (PAF), and Pakistan Navy.
+            </p>
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="flex items-start gap-5 md:gap-7">
+          <div class="w-[44px] h-[44px] md:w-[50px] md:h-[50px] rounded-full bg-badge text-white font-sans font-semibold text-[18px] md:text-[20px] flex items-center justify-center flex-shrink-0 shadow-sm">
+            2
+          </div>
+          <div class="pt-1.5">
+            <h3 class="font-sans text-[14px] font-bold uppercase text-[#111111] tracking-[0.01em] leading-[1.3]">
+              WHAT IS THE CREDIBILITY OF OUR TEACHERS?
+            </h3>
+            <!-- Rewritten answer per user instructions -->
+            <p class="font-sans text-[14px] font-normal text-muted leading-[1.5] mt-1.5">
+              You will be mentored directly by decorated military personnel and veterans with 30+ years of distinguished service as commissioned Pakistan Army Officers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="flex items-start gap-5 md:gap-7">
+          <div class="w-[44px] h-[44px] md:w-[50px] md:h-[50px] rounded-full bg-badge text-white font-sans font-semibold text-[18px] md:text-[20px] flex items-center justify-center flex-shrink-0 shadow-sm">
+            3
+          </div>
+          <div class="pt-1.5">
+            <!-- Typo fix "ACQUAINTED" per §9b -->
+            <h3 class="font-sans text-[14px] font-bold uppercase text-[#111111] tracking-[0.01em] leading-[1.3]">
+              HOW ACQUAINTED IS OUR FACULTY WITH TODAY'S PAK ARMY STANDARDS?
+            </h3>
+            <!-- Rewritten answer per user instructions -->
+            <p class="font-sans text-[14px] font-normal text-muted leading-[1.5] mt-1.5">
+              Our faculty members keep up to date with modern ISSB selection rubrics, physical standards, and psychological benchmarks to ensure candidates are fully prepared.
+            </p>
+          </div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="flex items-start gap-5 md:gap-7">
+          <div class="w-[44px] h-[44px] md:w-[50px] md:h-[50px] rounded-full bg-badge text-white font-sans font-semibold text-[18px] md:text-[20px] flex items-center justify-center flex-shrink-0 shadow-sm">
+            4
+          </div>
+          <div class="pt-1.5 flex-1">
+            <h3 class="font-sans text-[14px] font-bold uppercase text-[#111111] tracking-[0.01em] leading-[1.3]">
+              WHERE DO I BEGIN?
+            </h3>
+            <p class="font-sans text-[14px] font-normal text-muted leading-[1.5] mt-1.5">
+              Contact us through WhatsApp with your educational background and target wing to receive complete enrollment guidance and batch timings.
+            </p>
+            <!-- [NEW] WhatsApp Action Button (All White with subtle shadow, smaller text, centered & balanced spacing) -->
+            <div class="my-6 flex justify-center">
+              <a 
+                href="https://wa.me/[PHONE]" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-2 bg-white hover:bg-neutral-50 text-neutral-800 border border-neutral-300 font-sans font-semibold uppercase text-[11px] tracking-[0.08em] px-5 py-2.5 rounded-md min-h-[40px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                <svg class="w-4 h-4 fill-current text-[#25D366] flex-shrink-0" viewBox="0 0 24 24">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+                </svg>
+                <span>CONTACT VIA WHATSAPP</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- 6.7 FIND US HERE (§5, §6.7, §9b)                                        -->
+    <!-- ======================================================================= -->
+    <section id="contact" class="max-w-[1200px] mx-auto px-4 mt-[138px] pb-24 reveal">
+      <!-- Ornament Divider per §9b fix -->
+      <div class="flex items-center justify-center max-w-[570px] w-full mx-auto mb-7" aria-hidden="true">
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-brand"></div>
+        <span class="text-brand text-[24px] leading-none px-4 select-none">✥</span>
+        <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-brand"></div>
+      </div>
+
+      <!-- Section H2 (Uppercase tracked per §9b) -->
+      <h2 class="font-display font-semibold uppercase text-brand text-[clamp(1.75rem,3vw,2.6rem)] tracking-[0.15em] md:tracking-[0.22em] text-center leading-[1.1]">
+        FIND US HERE
+      </h2>
+
+      <!-- 2 Columns: Contact Card + Dark Map (913px container, 22px gap) -->
+      <div class="max-w-[913px] mx-auto mt-[80px] grid grid-cols-1 md:grid-cols-2 gap-[22px] items-stretch">
+        
+        <!-- Contact Card (440x270px) -->
+        <div class="bg-white border border-line rounded-[8px] shadow-card hover:shadow-cardHover hover:border-neutral-400 transition-all duration-200 p-7 flex flex-col justify-between min-h-[270px]">
+          <!-- Contact Phone Block -->
+          <div>
+            <h3 class="font-sans text-[18px] font-bold uppercase text-neutral-900 tracking-normal leading-[1.2]">
+              CONTACT:
+            </h3>
+            <p class="font-display text-[16px] md:text-[17px] font-normal text-muted tracking-[0.12em] md:tracking-[0.15em] leading-[1.5] mt-1">
+              <a href="tel:[PHONE]" class="hover:text-brand transition-colors focus:outline-none focus:ring-1 focus:ring-brand">
+                [PHONE]
+              </a>
+            </p>
+          </div>
+
+          <!-- Address Block (Title Case per §9b) -->
+          <div class="my-3">
+            <h3 class="font-sans text-[18px] font-bold uppercase text-neutral-900 tracking-normal leading-[1.2]">
+              ADDRESS:
+            </h3>
+            <p class="font-display text-[15px] md:text-[16px] font-normal text-muted tracking-[0.08em] md:tracking-[0.12em] leading-[1.4] mt-1">
+              House Number 15A, Upper Portion,<br>
+              Hashmi Garden, Bahawalpur
+            </p>
+          </div>
+
+          <!-- Email Block -->
+          <div>
+            <h3 class="font-sans text-[18px] font-bold uppercase text-neutral-900 tracking-normal leading-[1.2]">
+              EMAIL:
+            </h3>
+            <p class="font-display text-[16px] md:text-[17px] font-normal text-muted tracking-[0.12em] md:tracking-[0.15em] leading-[1.5] mt-1">
+              <a href="mailto:[EMAIL]" class="hover:text-brand transition-colors focus:outline-none focus:ring-1 focus:ring-brand">
+                [EMAIL]
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Styled Dark Map Block (§5, §6.7) -->
+        <div class="w-full min-h-[270px] bg-mapbg rounded-[8px] overflow-hidden relative shadow-card flex items-center justify-center">
+          <!-- Real Google Maps Embed iframe with dark styling container -->
+          <iframe 
+            title="Askari Academy Location Map"
+            src="https://maps.google.com/maps?q=Hashmi+Garden,+Bahawalpur,+Pakistan&t=&z=14&ie=UTF8&iwloc=&output=embed"
+            class="w-full h-full min-h-[270px] border-0 filter invert-[90%] hue-rotate-180 contrast-[1.2] opacity-80 hover:opacity-100 transition-opacity"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <!-- Green Location Pin Overlay [NEW per §5] -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center shadow-lg border-2 border-white animate-bounce">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+              </div>
+              <span class="mt-1 bg-neutral-900/90 text-white font-sans text-[11px] font-semibold px-2 py-0.5 rounded shadow">
+                Askari Academy
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- 6.8 FOOTER (§5, §6.8)                                                     -->
+  <!-- ========================================================================= -->
+  <footer class="w-full bg-footer text-white relative pt-12 pb-16 px-6 md:px-12 select-none">
+    
+    <!-- Top Row: Brand Info (Left) + Slanted Back-to-Top Button (Right Flush) -->
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between border-b border-white/10 pb-8 relative">
+      <!-- Brand Area: Logo + Cream Wordmark + Tagline -->
+      <div class="flex items-center gap-4">
+        <!-- Logo Placeholder [BRAND LOGO] -->
+        <div class="w-12 h-12 rounded bg-neutral-800 border border-neutral-700 flex items-center justify-center text-brand text-xs font-bold text-center uppercase p-1">
+          LOGO
+        </div>
+        <div>
+          <!-- Wordmark: Cream uppercase -->
+          <span class="font-display text-[22px] font-normal uppercase text-cream tracking-[0.2em] leading-none block">
+            ASKARI ACADEMY
+          </span>
+          <!-- Tagline: Sage uppercase -->
+          <span class="font-sans text-[11px] font-normal uppercase text-sage tracking-[0.3em] leading-none block mt-1.5">
+            NURTURING THE OFFICER IN YOU
+          </span>
+        </div>
+      </div>
+
+      <!-- Back-to-Top Shape Flush Right (§5, §6.8) -->
+      <a 
+        href="#home" 
+        class="back-to-top-polygon mt-6 md:mt-0 md:absolute md:top-[-48px] md:right-[-48px] lg:right-[-48px] w-[200px] md:w-[258px] h-[64px] md:h-[78px] bg-brand hover:bg-brand-dark flex items-center justify-center gap-3 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 z-10"
+        aria-label="Back to top">
+        <!-- White Upward Triangle -->
+        <svg class="w-6 h-6 md:w-8 md:h-8 fill-current text-white flex-shrink-0" viewBox="0 0 24 24">
+          <path d="M12 4l-8 8h5v8h6v-8h5z"/>
+        </svg>
+        <span class="font-sans text-[11px] md:text-[12px] font-bold uppercase tracking-[0.1em] text-[#E0F2E9] leading-tight text-left">
+          BACK<br>TO TOP
+        </span>
+      </a>
+    </div>
+
+    <!-- 4 Footer Columns (Home, Location, Contacts, Follow Us) (§6.8) -->
+    <div class="max-w-[1200px] mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+      
+      <!-- Col 1: 4 Nav Links only (§9a) -->
+      <div class="space-y-3">
+        <h3 class="font-display text-[20px] font-normal uppercase text-white tracking-[0.05em] mb-4">
+          NAVIGATION
+        </h3>
+        <nav class="flex flex-col gap-2.5">
+          <a href="#home" class="font-sans text-[13px] font-semibold uppercase tracking-[0.01em] text-white hover:text-brand transition-colors">HOME</a>
+          <a href="#courses" class="font-sans text-[13px] font-semibold uppercase tracking-[0.01em] text-white hover:text-brand transition-colors">COURSES</a>
+          <a href="#about" class="font-sans text-[13px] font-semibold uppercase tracking-[0.01em] text-white hover:text-brand transition-colors">ABOUT</a>
+          <a href="#contact" class="font-sans text-[13px] font-semibold uppercase tracking-[0.01em] text-white hover:text-brand transition-colors">CONTACT US</a>
+        </nav>
+      </div>
+
+      <!-- Col 2: Location -->
+      <div class="space-y-3">
+        <h3 class="font-display text-[20px] font-normal uppercase text-white tracking-[0.05em] mb-4">
+          LOCATION
+        </h3>
+        <p class="font-sans text-[13px] font-normal text-[#C9D0CA] leading-relaxed">
+          House no. 15A, Upper Portion<br>
+          Hashmi Garden, Bahawalpur
+        </p>
+        <div class="pt-1">
+          <a 
+            href="https://maps.google.com/?q=Hashmi+Garden,+Bahawalpur,+Pakistan" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 font-sans text-[13px] font-medium text-white hover:text-brand underline underline-offset-4 transition-colors">
+            <svg class="w-4 h-4 fill-current text-brand" viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            <span>Map</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 3: Contacts (§9b single phone formatting) -->
+      <div class="space-y-3">
+        <h3 class="font-display text-[20px] font-normal uppercase text-white tracking-[0.05em] mb-4">
+          CONTACTS
+        </h3>
+        <p class="font-sans text-[13px] font-normal text-[#C9D0CA] leading-relaxed">
+          Phone: <a href="tel:[PHONE]" class="text-white hover:text-brand transition-colors">[PHONE]</a>
+        </p>
+        <p class="font-sans text-[13px] font-normal text-[#C9D0CA] leading-relaxed">
+          E-mail: <a href="mailto:[EMAIL]" class="text-white hover:text-brand transition-colors">[EMAIL]</a>
+        </p>
+      </div>
+
+      <!-- Col 4: Follow Us (3 Brand Colored Icons §5) -->
+      <div class="space-y-3">
+        <h3 class="font-display text-[20px] font-normal uppercase text-white tracking-[0.05em] mb-4">
+          FOLLOW US
+        </h3>
+        <div class="flex items-center gap-4 pt-1">
+          <!-- Instagram -->
+          <a href="#" class="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="Instagram">
+            <svg class="w-5 h-5 fill-current text-[#E1306C]" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/[PHONE]" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="WhatsApp">
+            <svg class="w-5 h-5 fill-current text-[#25D366]" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+          <a href="#" class="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="Facebook">
+            <svg class="w-5 h-5 fill-current text-[#1877F2]" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- 6.9 LEGAL BAR (§6.9)                                                      -->
+  <!-- ========================================================================= -->
+  <div class="w-full bg-legal py-3 px-6 md:px-12">
+    <div class="max-w-[1200px] mx-auto">
+      <p class="font-sans text-[11px] font-normal text-neutral-400 text-left">
+        Copyright &copy; 2026 Askari Academy. All rights reserved. Pre-Cadet &amp; ISSB Preparation Institute.
+      </p>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- INTERACTIVE SCRIPTS & MOTION (§8)                                         -->
+  <!-- ========================================================================= -->
+  <script>
+    // Navigation Drawer Toggle
+    function toggleMenu(open) {
+      const drawer = document.getElementById('menu-drawer');
+      const scrim = document.getElementById('menu-scrim');
+      const isOpen = !drawer.classList.contains('-translate-x-full');
+      const shouldOpen = open !== undefined ? open : !isOpen;
+
+      if (shouldOpen) {
+        drawer.classList.remove('-translate-x-full');
+        scrim.classList.remove('opacity-0', 'pointer-events-none');
+        document.body.classList.add('overflow-hidden');
+      } else {
+        drawer.classList.add('-translate-x-full');
+        scrim.classList.add('opacity-0', 'pointer-events-none');
+        document.body.classList.remove('overflow-hidden');
+      }
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') toggleMenu(false);
+    });
+
+    // Scroll Reveal (IntersectionObserver per §8)
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    } else {
+      // Fallback
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+    }
+  </script>
+</body>
+</html>
